@@ -29,37 +29,42 @@
 <body>
 
 <div class="container">
+  <div class="navbar-header">
+	  <img src="./assets/APanak-logo-Fin-01.png" width="20%">
+  </div>
   <div>  
   <img class="image" src="http://demo.phpgang.com/crop-images/demo_files/pool.jpg" width="100%">
   </div>
   <div class="row">  
    <div class="col-sm-12">
-	<h3 id="title"><b>product name</b></h3>
+	<h3 ><b id="title"></b></h3> 
 	</div>
   </div>
     <div class="row">
 	 <div class="col-sm-12">
-	<h3>content of product</h3>
+	<h3 id="description">content of product</h3>
 	</div>
   </div>
   
    <div class="row">
     <div class="col-sm-12" id="description">
-      <span>Price: </span>
+    <span>Price: </span>
 	  <span><del>23$</del></span>
 	  <span>18$</span>
-	   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	  	<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
+	  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  <span class="fa fa-star checked1"></span>
+		<span class="fa fa-star checked2"></span>
+		<span class="fa fa-star checked3"></span>
+		<span class="fa fa-star checked4"></span>
+		<span class="fa fa-star checked5"></span>
 		
     </div>
 	
 	
   </div>
-  
+  <div>
+	<a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.example.com&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!" target="_blank" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><button style="width:100%; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i> Share on Facebook</button></a>
+  </div>
      <div class="row" style="height:50px;">
 	 </div>
   
@@ -67,16 +72,41 @@
 
 	<script>
 	$(document).ready(function(){
-		var title = $("#title").text();
-		var type = "type";
-		var image = $(".image").attr('src');
-		var url = "apanak.com";
-		var description = $("#description").html();
+		// var title = $("#title").text();
+		// var type = "type";
+		// var image = $(".image").attr('src');
+		// var url = "apanak.com";
+		// var description = $("#description").html();
+		var API_IMG= 'https://www.apanak.com/apanak-api-server/';
+		var title = "";
+		var type = "";
+		var image = "";
+		var url = "";
+		var description = "";
+		var url='https://www.apanak.com/apanak-api-server/api/products/P20170000091';
+		var rate = 0;
+		$.getJSON( url, function(data){
+			console.log("body",data);
+			image = API_IMG + data.data.prodImg + "_m.jpg";
+			title = data.data.prodName;
+			type = title;
+			url = "https://shop.apanak.com/product/detail/" + "P20170000091";
+			description = data.data.prodDescription;
+			console.log("title",title, "url = ", url, "description", description);
+			rate = data.data.detail.prodRates;
+		$("#title").text(title);
+		$("#description").text(description);
+		$(".image").attr('src',image);
+		for (i = 1; i <=rate; i++) {
+			$(".checked"+i).addClass("checked");
+		} 
+
 		$("meta[property='og:title']").attr("content", title);
 		$("meta[property='og:type']").attr("content", type);
 		$("meta[property='og:image']").attr("content", image);
 		$("meta[property='og:url']").attr("content", url);
 		$("meta[property='og:description']").attr("content", description);
+		})
 	});
 	</script>
  </body>

@@ -94,7 +94,17 @@ table tr th { color: #688a7e;}
 
 }
 
-
+.btn-facebook {
+	color: #fff;
+	background-color: #4C67A1;
+}
+.btn-facebook:hover {
+	color: #fff;
+	background-color: #405D9B;
+}
+.btn-facebook:focus {
+	color: #fff;
+}
 
 .Creative-pro, .Creative-pro h3{
 
